@@ -49,7 +49,8 @@ userRouter.post("/register",async(req,res)=>{
 
 
 userRouter.post("/login",async(req,res)=>{
-
+    
+    const {email,password}=req.body;
     const missingFields = [];
     if (!email) missingFields.push('email');
     if (!password) missingFields.push('password');
@@ -59,7 +60,6 @@ userRouter.post("/login",async(req,res)=>{
       return res.status(200).json({ msg: `Please fill in the following fields: ${missingFields.join(',')}` });
     }
     try {
-        const {email,password}=req.body;
         const existinguser= await userModel.findOne({email});
         if (!existinguser){
            
