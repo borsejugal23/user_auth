@@ -63,7 +63,7 @@ userRouter.post("/login",async(req,res)=>{
         const existinguser= await userModel.findOne({email});
         if (!existinguser){
            
-            return res.status(404).json({msg:"User not found,please create account"})
+            return res.status(200).json({msg:"User not found,please create account"})
         }
         bcrypt.compare(password,existinguser.password,async(err,result)=>{
             if (result){
