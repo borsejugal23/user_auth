@@ -67,7 +67,9 @@ userRouter.post("/login",async(req,res)=>{
         }
         bcrypt.compare(password,existinguser.password,async(err,result)=>{
             if (result){
-                const token=jwt.sign({userID:existinguser._id,username:existinguser.name},process.env.secretKey);
+                const token=jwt.sign({userID:existinguser._id},process.env.secretKey,{
+                    expiresIn:120
+                });
                 return res.status(200).json({msg:"Login successfully",token:token})
 
             }

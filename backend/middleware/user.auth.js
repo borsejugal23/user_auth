@@ -7,11 +7,12 @@ try {
     const token=req.headers.authorization?.split(" ")[1];
 
     if (token){
-        const decoded=jwt.verify(token,process.env.secretKey);
+        const decoded=jwt.verify(token,process.env.secretKey,{
+            expiresIn:120
+        });
 
             if (decoded){
                 req.body.creator=decoded.userID;
-                req.body.username=decoded.username;
                 next()
 
             }
